@@ -56,7 +56,8 @@ bash <(curl -Ls https://github.com/wclck/backup/raw/main/backup.sh)
 
 ###
 
-<p align="left">The cron job is set to 12am daily by default, you can change it manually before running the script [here](https://github.com/wclck/backup/blob/a98101e9a470990795836d8b7894243d835ba847/backup.sh#L8) </p>
+<p align="left">The cron job is set to 12am daily by default, you can change it manually before running the script here:
+  https://github.com/wclck/backup/blob/a98101e9a470990795836d8b7894243d835ba847/backup.sh#L8 </p>
 
 ###
 
