@@ -44,7 +44,7 @@ done
 # MySQL User
 while [[ -z "$MYSQL_USER" ]]; do
     echo "Enter MySQL user: "
-    read -r -s MYSQL_USER
+    read -r MYSQL_USER
     if [[ -z "$MYSQL_USER" ]]; then
         echo "MySQL root password cannot be empty."
     fi
