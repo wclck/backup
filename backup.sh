@@ -8,7 +8,8 @@ CAPTION=""
 CRON_TIME="0 0 * * *"  # Default cron job for 12 AM daily
 
 # MySQL setup
-MYSQL_ROOT_PASSWORD=""
+MYSQL_USER=""
+MYSQL_PASSWORD=""
 MYSQL_DB="marzban"
 MYSQL_CONTAINER="marzban-mysql-1"
 MYSQL_DUMP_FILE="/root/marzban-db.sql"
@@ -40,12 +41,21 @@ while [[ -z "$BOT_TOKEN" ]]; do
     fi
 done
 
-# MySQL Root Password
-while [[ -z "$MYSQL_ROOT_PASSWORD" ]]; do
-    echo "Enter MySQL root password: "
-    read -r -s MYSQL_ROOT_PASSWORD
-    if [[ -z "$MYSQL_ROOT_PASSWORD" ]]; then
+# MySQL User
+while [[ -z "$MYSQL_USER" ]]; do
+    echo "Enter MySQL user: "
+    read -r -s MYSQL_USER
+    if [[ -z "$MYSQL_USER" ]]; then
         echo "MySQL root password cannot be empty."
+    fi
+done
+
+# MySQL Root Password
+while [[ -z "$MYSQL_PASSWORD" ]]; do
+    echo "Enter MySQL password: "
+    read -r -s MYSQL_PASSWORD
+    if [[ -z "$MYSQL_PASSWORD" ]]; then
+        echo "MySQL password cannot be empty."
     fi
 done
 
@@ -127,7 +137,8 @@ cat > "$BACKUP_SCRIPT" << EOL
 #!/bin/bash
 
 # MySQL Dump
-MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD"
+MYSQL_USER="$MYSQL_USER"
+MYSQL_PASSWORD="$MYSQL_PASSWORD"
 MYSQL_DB="$MYSQL_DB"
 MYSQL_CONTAINER="$MYSQL_CONTAINER"
 MYSQL_DUMP_FILE="/root/marzban-db.sql"
@@ -142,7 +153,7 @@ CHAT_IDS="${CHAT_IDS[@]}"
 
 # Step 1: Create MySQL Dump
 echo "Creating MySQL dump..."
-docker exec "\$MYSQL_CONTAINER" mysqldump -u root -p"\$MYSQL_ROOT_PASSWORD" "\$MYSQL_DB" > "\$MYSQL_DUMP_FILE"
+docker exec "\$MYSQL_CONTAINER" mysqldump -u "\$MYSQL_USER" -p"\$MYSQL_PASSWORD" "\$MYSQL_DB" > "\$MYSQL_DUMP_FILE"
 
 # Step 2: Create Backup Zip
 echo "Creating backup zip..."
