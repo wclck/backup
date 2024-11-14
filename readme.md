@@ -75,11 +75,12 @@ bash <(curl -Ls https://github.com/wclck/backup/raw/main/backup.sh)
 
 <p align="left">If you have entered everything correctly, the backup file should be sent to you once, otherwise there is a problem in this process and you can raise your problem from the issues</p>
 
-<p align="left">You can check the mysql persistance volume location with command:
+<p align="left">You can check the mysql persistance volume location with command:</p>
+  
 ```bash
 docker volume inspect mysql
 ``` 
-In my case:
-/var/lib/docker/volumes/mysql/_data
+<p align="left">In my case:</p>
+<p align="left">/var/lib/docker/volumes/mysql/_data
 </p>
 
